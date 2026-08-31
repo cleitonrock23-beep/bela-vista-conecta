@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Descubra os comércios do bairro Bela Vista em Guarulhos. Apoie o comércio local!" />
+  <title>Bela Vista Conecta — Comércio Local de Guarulhos</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">📍</span>
+        <span class="logo-text">Bela Vista <strong>Conecta</strong></span>
+      </div>
+      <a class="btn-cadastro" href="cadastro.html">Cadastrar meu comércio</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-tag">Bela Vista · Guarulhos · SP</span>
+      <h1>O bairro na palma<br>da sua mão</h1>
+      <p>Encontre bares, restaurantes, salões, mercados e muito mais pertinho de você. Apoie quem é daqui.</p>
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Buscar comércio ou serviço..." autocomplete="off" />
+        <button onclick="filtrar()">Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="section-cats">
+    <div class="container">
+      <div class="cats" id="cats">
+        <button class="cat active" data-cat="todos" onclick="setCat('todos', this)">🏪 Todos</button>
+        <button class="cat" data-cat="alimentacao" onclick="setCat('alimentacao', this)">🍽️ Alimentação</button>
+        <button class="cat" data-cat="servicos" onclick="setCat('servicos', this)">✂️ Serviços</button>
+        <button class="cat" data-cat="comercio" onclick="setCat('comercio', this)">🛒 Comércio</button>
+        <button class="cat" data-cat="saude" onclick="setCat('saude', this)">💊 Saúde</button>
+        <button class="cat" data-cat="beleza" onclick="setCat('beleza', this)">💅 Beleza</button>
+        <button class="cat" data-cat="pet" onclick="setCat('pet', this)">🐾 Pet</button>
+        <button class="cat" data-cat="educacao" onclick="setCat('educacao', this)">📚 Educação</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMERCIOS -->
+  <section class="section-comercios">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="resultado-label">Todos os comércios</h2>
+        <span class="count" id="count-label">6 cadastrados</span>
+      </div>
+      <div class="grid" id="grid">
+        <!-- cards gerados pelo JS -->
+      </div>
+      <div class="empty hidden" id="empty">
+        <p>😕 Nenhum comércio encontrado.</p>
+        <a href="cadastro.html">Cadastrar novo comércio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER CADASTRO -->
+  <section class="banner-cadastro">
+    <div class="container banner-inner">
+      <div>
+        <h3>Seu comércio ainda não está aqui?</h3>
+        <p>O cadastro é gratuito e leva menos de 2 minutos.</p>
+      </div>
+      <a class="btn-primary" href="cadastro.html">Cadastrar agora</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>Bela Vista Conecta · Guarulhos, SP</p>
+      <p class="footer-sub">Feito com ❤️ para o bairro</p>
+    </div>
+  </footer>
+
+  <script src="js/comercios.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

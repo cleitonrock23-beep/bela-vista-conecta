@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastrar Comércio — Bela Vista Conecta</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-icon">📍</span>
+        <span class="logo-text">Bela Vista <strong>Conecta</strong></span>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero hero-small">
+    <div class="container">
+      <span class="hero-tag">Cadastro gratuito</span>
+      <h1>Coloque seu comércio<br>no mapa do bairro</h1>
+      <p>Preencha o formulário e entraremos em contato pelo WhatsApp para confirmar o cadastro.</p>
+    </div>
+  </section>
+
+  <section class="section-form">
+    <div class="container">
+      <div class="form-card">
+        <div id="form-area">
+          <div class="form-group">
+            <label for="nome">Nome do comércio *</label>
+            <input type="text" id="nome" placeholder="Ex: Bar do Zé" />
+            <span class="erro hidden" id="erro-nome">Informe o nome do comércio.</span>
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoria *</label>
+            <select id="categoria">
+              <option value="">Selecione...</option>
+              <option value="alimentacao">🍽️ Alimentação</option>
+              <option value="servicos">✂️ Serviços</option>
+              <option value="comercio">🛒 Comércio</option>
+              <option value="saude">💊 Saúde</option>
+              <option value="beleza">💅 Beleza</option>
+              <option value="pet">🐾 Pet</option>
+              <option value="educacao">📚 Educação</option>
+            </select>
+            <span class="erro hidden" id="erro-cat">Selecione uma categoria.</span>
+          </div>
+          <div class="form-group">
+            <label for="descricao">Descrição breve *</label>
+            <input type="text" id="descricao" placeholder="Ex: Lanches, sucos e pastéis" />
+            <span class="erro hidden" id="erro-desc">Adicione uma descrição.</span>
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp *</label>
+            <input type="tel" id="whatsapp" placeholder="(11) 9 0000-0000" />
+            <span class="erro hidden" id="erro-wpp">Informe o WhatsApp.</span>
+          </div>
+          <div class="form-group">
+            <label for="endereco">Endereço ou referência</label>
+            <input type="text" id="endereco" placeholder="Ex: Rua das Flores, 123 — perto do mercado" />
+          </div>
+          <div class="form-group">
+            <label for="horario">Horário de funcionamento</label>
+            <input type="text" id="horario" placeholder="Ex: Seg a Sex, 8h às 18h" />
+          </div>
+          <button class="btn-primary btn-full" onclick="enviarCadastro()">Enviar pelo WhatsApp</button>
+          <p class="form-obs">Você será redirecionado ao WhatsApp para confirmar o cadastro. É rápido e gratuito.</p>
+        </div>
+        <div id="sucesso" class="hidden sucesso-box">
+          <span class="sucesso-icon">✅</span>
+          <h3>Dados enviados!</h3>
+          <p>Continue a conversa no WhatsApp para finalizar seu cadastro.</p>
+          <a href="index.html" class="btn-primary">Voltar ao início</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Bela Vista Conecta · Guarulhos, SP</p>
+      <p class="footer-sub">Feito com ❤️ para o bairro</p>
+    </div>
+  </footer>
+
+  <script src="js/cadastro.js"></script>
+</body>
+</html>
