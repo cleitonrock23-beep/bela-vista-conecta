@@ -4,27 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastrar Comércio — Bela Vista Conecta</title>
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <header class="header">
     <div class="container header-inner">
       <a class="logo" href="index.html">
-        <span class="logo-icon">📍</span>
-        <span class="logo-text">Bela Vista <strong>Conecta</strong></span>
+        <span class="logo-dot"></span>
+        <span class="logo-text">Bela Vista <em>Conecta</em></span>
       </a>
+      <nav class="nav">
+        <a href="index.html">← Voltar ao site</a>
+      </nav>
     </div>
   </header>
 
-  <section class="hero hero-small">
+  <section class="hero hero-small" style="padding: 2.5rem 0 2rem;">
     <div class="container">
-      <span class="hero-tag">Cadastro gratuito</span>
-      <h1>Coloque seu comércio<br>no mapa do bairro</h1>
-      <p>Preencha o formulário e entraremos em contato pelo WhatsApp para confirmar o cadastro.</p>
+      <p class="hero-eyebrow">Cadastro gratuito</p>
+      <h1 style="font-size: clamp(26px,4vw,38px);">Coloque seu comércio<br><em>no mapa do bairro</em></h1>
+      <p class="hero-sub" style="margin-bottom:0;">Preencha o formulário e entraremos em contato pelo WhatsApp para confirmar.</p>
     </div>
   </section>
 
@@ -32,10 +35,13 @@
     <div class="container">
       <div class="form-card">
         <div id="form-area">
+          <p class="form-title">Dados do comércio</p>
+          <p class="form-sub">Todas as informações serão conferidas antes de publicar.</p>
+
           <div class="form-group">
             <label for="nome">Nome do comércio *</label>
             <input type="text" id="nome" placeholder="Ex: Bar do Zé" />
-            <span class="erro hidden" id="erro-nome">Informe o nome do comércio.</span>
+            <span class="erro hidden" id="erro-nome">Informe o nome.</span>
           </div>
           <div class="form-group">
             <label for="categoria">Categoria *</label>
@@ -57,7 +63,7 @@
             <span class="erro hidden" id="erro-desc">Adicione uma descrição.</span>
           </div>
           <div class="form-group">
-            <label for="whatsapp">WhatsApp *</label>
+            <label for="whatsapp">WhatsApp para contato *</label>
             <input type="tel" id="whatsapp" placeholder="(11) 9 0000-0000" />
             <span class="erro hidden" id="erro-wpp">Informe o WhatsApp.</span>
           </div>
@@ -69,23 +75,28 @@
             <label for="horario">Horário de funcionamento</label>
             <input type="text" id="horario" placeholder="Ex: Seg a Sex, 8h às 18h" />
           </div>
-          <button class="btn-primary btn-full" onclick="enviarCadastro()">Enviar pelo WhatsApp</button>
-          <p class="form-obs">Você será redirecionado ao WhatsApp para confirmar o cadastro. É rápido e gratuito.</p>
+
+          <button class="btn-primary btn-full" onclick="enviarCadastro()">Enviar pelo WhatsApp →</button>
+          <p class="form-obs">Você será redirecionado ao WhatsApp para confirmar o cadastro. É gratuito.</p>
         </div>
+
         <div id="sucesso" class="hidden sucesso-box">
           <span class="sucesso-icon">✅</span>
           <h3>Dados enviados!</h3>
-          <p>Continue a conversa no WhatsApp para finalizar seu cadastro.</p>
-          <a href="index.html" class="btn-primary">Voltar ao início</a>
+          <p>Continue a conversa no WhatsApp para finalizar seu cadastro no Bela Vista Conecta.</p>
+          <a href="index.html" class="btn-primary">Voltar ao site</a>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="container">
-      <p>Bela Vista Conecta · Guarulhos, SP</p>
-      <p class="footer-sub">Feito com ❤️ para o bairro</p>
+    <div class="container footer-inner">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Bela Vista <em>Conecta</em></span>
+      </div>
+      <p class="footer-copy">Feito com ❤️ para o bairro · Guarulhos, SP</p>
     </div>
   </footer>
 

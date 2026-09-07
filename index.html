@@ -3,88 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Descubra os comércios do bairro Bela Vista em Guarulhos. Apoie o comércio local!" />
+  <meta name="description" content="Guia completo dos comércios do bairro Bela Vista em Guarulhos. Encontre bares, restaurantes, serviços e muito mais perto de você." />
   <title>Bela Vista Conecta — Comércio Local de Guarulhos</title>
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="header">
     <div class="container header-inner">
-      <div class="logo">
-        <span class="logo-icon">📍</span>
-        <span class="logo-text">Bela Vista <strong>Conecta</strong></span>
-      </div>
-      <a class="btn-cadastro" href="cadastro.html">Cadastrar meu comércio</a>
+      <a class="logo" href="index.html">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Bela Vista <em>Conecta</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#comercios">Comércios</a>
+        <a href="#mapa">Mapa</a>
+        <a href="cadastro.html" class="nav-cta">Cadastrar comércio</a>
+      </nav>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <span class="hero-tag">Bela Vista · Guarulhos · SP</span>
-      <h1>O bairro na palma<br>da sua mão</h1>
-      <p>Encontre bares, restaurantes, salões, mercados e muito mais pertinho de você. Apoie quem é daqui.</p>
-      <div class="search-wrap">
-        <input type="text" id="search-input" placeholder="Buscar comércio ou serviço..." autocomplete="off" />
-        <button onclick="filtrar()">Buscar</button>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Bela Vista · Guarulhos · SP</p>
+        <h1>O comércio do<br><em>seu bairro,</em><br>todo aqui.</h1>
+        <p class="hero-sub">Descubra quem trabalha pertinho de você. Apoie o comércio local e fortaleça o bairro.</p>
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="search-input" placeholder="Buscar comércio ou serviço..." autocomplete="off" />
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num" id="total-count">6</span>
+          <span class="stat-label">comércios cadastrados</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">8</span>
+          <span class="stat-label">categorias</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">1</span>
+          <span class="stat-label">bairro conectado</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CATEGORIAS -->
-  <section class="section-cats">
-    <div class="container">
+  <!-- FILTROS -->
+  <div class="filtros-bar" id="comercios">
+    <div class="container filtros-inner">
       <div class="cats" id="cats">
-        <button class="cat active" data-cat="todos" onclick="setCat('todos', this)">🏪 Todos</button>
-        <button class="cat" data-cat="alimentacao" onclick="setCat('alimentacao', this)">🍽️ Alimentação</button>
-        <button class="cat" data-cat="servicos" onclick="setCat('servicos', this)">✂️ Serviços</button>
-        <button class="cat" data-cat="comercio" onclick="setCat('comercio', this)">🛒 Comércio</button>
-        <button class="cat" data-cat="saude" onclick="setCat('saude', this)">💊 Saúde</button>
-        <button class="cat" data-cat="beleza" onclick="setCat('beleza', this)">💅 Beleza</button>
-        <button class="cat" data-cat="pet" onclick="setCat('pet', this)">🐾 Pet</button>
-        <button class="cat" data-cat="educacao" onclick="setCat('educacao', this)">📚 Educação</button>
+        <button class="cat active" data-cat="todos" onclick="setCat('todos',this)">Todos</button>
+        <button class="cat" data-cat="alimentacao" onclick="setCat('alimentacao',this)">🍽️ Alimentação</button>
+        <button class="cat" data-cat="servicos" onclick="setCat('servicos',this)">✂️ Serviços</button>
+        <button class="cat" data-cat="comercio" onclick="setCat('comercio',this)">🛒 Comércio</button>
+        <button class="cat" data-cat="saude" onclick="setCat('saude',this)">💊 Saúde</button>
+        <button class="cat" data-cat="beleza" onclick="setCat('beleza',this)">💅 Beleza</button>
+        <button class="cat" data-cat="pet" onclick="setCat('pet',this)">🐾 Pet</button>
+        <button class="cat" data-cat="educacao" onclick="setCat('educacao',this)">📚 Educação</button>
       </div>
+      <span class="filtros-count" id="count-label">6 encontrados</span>
     </div>
-  </section>
+  </div>
 
-  <!-- COMERCIOS -->
-  <section class="section-comercios">
+  <!-- LISTA DE COMÉRCIOS -->
+  <section class="section-lista">
     <div class="container">
-      <div class="section-header">
-        <h2 id="resultado-label">Todos os comércios</h2>
-        <span class="count" id="count-label">6 cadastrados</span>
-      </div>
-      <div class="grid" id="grid">
-        <!-- cards gerados pelo JS -->
+      <div class="lista" id="lista">
+        <!-- gerado pelo JS -->
       </div>
       <div class="empty hidden" id="empty">
-        <p>😕 Nenhum comércio encontrado.</p>
-        <a href="cadastro.html">Cadastrar novo comércio</a>
+        <p class="empty-icon">🔍</p>
+        <p class="empty-title">Nenhum comércio encontrado</p>
+        <p class="empty-sub">Tente outro termo ou <a href="cadastro.html">cadastre esse comércio</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="section-mapa" id="mapa">
+    <div class="container">
+      <div class="mapa-header">
+        <h2>O bairro no mapa</h2>
+        <p>Bela Vista, Guarulhos — SP</p>
+      </div>
+      <div class="mapa-wrap">
+        <iframe
+          title="Mapa do bairro Bela Vista, Guarulhos"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0!2d-46.533!3d-23.453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef5b3b0f0f0f0%3A0x0!2sBela+Vista%2C+Guarulhos+-+SP!5e0!3m2!1spt-BR!2sbr!4v1693000000000!5m2!1spt-BR!2sbr"
+          width="100%"
+          height="420"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </section>
 
   <!-- BANNER CADASTRO -->
-  <section class="banner-cadastro">
+  <section class="banner">
     <div class="container banner-inner">
-      <div>
+      <div class="banner-text">
         <h3>Seu comércio ainda não está aqui?</h3>
-        <p>O cadastro é gratuito e leva menos de 2 minutos.</p>
+        <p>Cadastro gratuito, rápido e sem burocracia. Apareça para quem mora no bairro.</p>
       </div>
-      <a class="btn-primary" href="cadastro.html">Cadastrar agora</a>
+      <a href="cadastro.html" class="btn-primary">Cadastrar meu comércio →</a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <p>Bela Vista Conecta · Guarulhos, SP</p>
-      <p class="footer-sub">Feito com ❤️ para o bairro</p>
+    <div class="container footer-inner">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Bela Vista <em>Conecta</em></span>
+      </div>
+      <p class="footer-copy">Feito com ❤️ para o bairro · Guarulhos, SP</p>
     </div>
   </footer>
 
