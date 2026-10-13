@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Encontre comércios, serviços e profissionais do Bela Vista, em Guarulhos. Uma forma simples e gratuita de facilitar a vida dos moradores." />
-  <title>Bela Vista Conecta — Encontre o que precisa no bairro</title>
+  <meta name="description" content="Guia completo dos comércios do bairro Bela Vista em Guarulhos. Encontre bares, restaurantes, serviços e muito mais perto de você." />
+  <title>Bela Vista Conecta — Comércio Local de Guarulhos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -111,6 +111,15 @@
     .cat.active { background: var(--teal-light); border-color: var(--teal-mid); color: var(--teal); font-weight: 500; }
     .filtros-count { font-size: 13px; color: var(--ink-light); white-space: nowrap; flex-shrink: 0; }
 
+    /* LOADING */
+    .loading-wrap { text-align: center; padding: 4rem 1rem; color: var(--ink-muted); }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid var(--border);
+      border-top-color: var(--teal-mid); border-radius: 50%;
+      animation: spin .8s linear infinite; margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* LISTA */
     .section-lista { padding: 2rem 0 3rem; }
     .lista { display: flex; flex-direction: column; gap: 12px; }
@@ -211,28 +220,12 @@
     .erro { font-size: 12px; color: #c0392b; }
     .btn-full { width: 100%; text-align: center; padding: 12px; font-size: 15px; background: var(--teal); color: var(--white); }
     .btn-full:hover { background: #085a5a; opacity: 1; }
+    .btn-full:disabled { opacity: .6; cursor: not-allowed; }
     .form-obs { font-size: 12px; color: var(--ink-light); text-align: center; margin-top: .75rem; }
     .sucesso-box { text-align: center; padding: 1rem 0; }
     .sucesso-icon { font-size: 44px; display: block; margin-bottom: 1rem; }
     .sucesso-box h3 { font-family: var(--font-serif); font-size: 22px; margin-bottom: .5rem; }
     .sucesso-box p { color: var(--ink-muted); margin-bottom: 1.5rem; }
-
-    /* NOVAS SEÇÕES */
-    .quick-links { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-    .quick-links button { border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:rgba(255,255,255,.8); padding:7px 10px; border-radius:20px; font:inherit; font-size:12px; cursor:pointer; }
-    .quick-links button:hover { border-color:var(--teal-mid); background:rgba(255,255,255,.1); }
-    .needs-section { padding:3rem 0; background:var(--sand); }
-    .section-heading { margin-bottom:1.5rem; }
-    .section-kicker { color:var(--teal); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin-bottom:.35rem; }
-    .section-heading h2 { font-family:var(--font-serif); font-size:30px; line-height:1.15; margin-bottom:.5rem; }
-    .section-heading p:last-child { color:var(--ink-muted); }
-    .needs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .need-card { text-align:left; border:1px solid var(--border); background:var(--white); border-radius:var(--radius); padding:1rem; cursor:pointer; font-family:var(--font-sans); transition:.2s; }
-    .need-card:hover { transform:translateY(-2px); box-shadow:var(--shadow); border-color:var(--teal-mid); }
-    .need-card span { display:block; font-size:24px; margin-bottom:.5rem; }
-    .need-card strong { display:block; font-size:14px; margin-bottom:3px; color:var(--ink); }
-    .need-card small { color:var(--ink-light); line-height:1.4; }
-    .section-lista::before { content:'Comércios e serviços do bairro'; display:block; max-width:960px; margin:0 auto 1rem; padding:0 1.25rem; font-family:var(--font-serif); font-size:24px; font-weight:600; }
 
     /* RESPONSIVO */
     @media (max-width: 700px) {
@@ -244,7 +237,6 @@
       .card-actions { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
       .banner-inner { flex-direction: column; text-align: center; }
       .footer-inner { flex-direction: column; text-align: center; }
-      .needs-grid { grid-template-columns:1fr 1fr; }
     }
   </style>
 </head>
@@ -260,7 +252,7 @@
       <nav class="nav">
         <a href="#comercios">Comércios</a>
         <a href="#mapa">Mapa</a>
-        <a href="#" class="nav-cta" onclick="abrirModal();return false;">Cadastrar meu negócio</a>
+        <a href="#" class="nav-cta" onclick="abrirModal();return false;">Cadastrar comércio</a>
       </nav>
     </div>
   </header>
@@ -270,44 +262,29 @@
     <div class="container hero-inner">
       <div class="hero-text">
         <p class="hero-eyebrow">Bela Vista · Guarulhos · SP</p>
-        <h1>Precisa de algo<br><em>no bairro?</em><br>Encontre aqui.</h1>
-        <p class="hero-sub">Comércios, serviços e profissionais perto de você, de forma rápida e fácil.</p>
+        <h1>O comércio do<br><em>seu bairro,</em><br>todo aqui.</h1>
+        <p class="hero-sub">Descubra quem trabalha pertinho de você. Apoie o comércio local e fortaleça o bairro.</p>
         <div class="search-wrap">
           <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
             <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <input type="text" id="search-input" placeholder="Ex.: eletricista, pizza, salão, farmácia..." autocomplete="off" />
-        </div>
-        <div class="quick-links">
-          <button onclick="buscarAtalho('eletricista')">🔧 Eletricista</button>
-          <button onclick="buscarAtalho('comida')">🍕 Comida</button>
-          <button onclick="buscarAtalho('farmácia')">💊 Farmácia</button>
-          <button onclick="buscarAtalho('salão')">💇 Beleza</button>
+          <input type="text" id="search-input" placeholder="Buscar comércio ou serviço..." autocomplete="off" />
         </div>
       </div>
       <div class="hero-stats">
-        <div class="stat-card"><span class="stat-num" id="total-count">0</span><span class="stat-label">negócios cadastrados</span></div>
-        <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">gratuito para participar</span></div>
-        <div class="stat-card"><span class="stat-num">1</span><span class="stat-label">bairro conectado</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="needs-section">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-kicker">Facilite seu dia</p>
-        <h2>O que você precisa hoje?</h2>
-        <p>Escolha uma necessidade e encontre opções do próprio bairro.</p>
-      </div>
-      <div class="needs-grid">
-        <button class="need-card" onclick="buscarAtalho('eletricista')"><span>🔧</span><strong>Serviços para casa</strong><small>Eletricista, encanador e reparos</small></button>
-        <button class="need-card" onclick="buscarAtalho('alimentação')"><span>🍔</span><strong>Alimentação</strong><small>Restaurantes, lanches e marmitas</small></button>
-        <button class="need-card" onclick="buscarAtalho('beleza')"><span>💇</span><strong>Beleza</strong><small>Salões, barbearias e estética</small></button>
-        <button class="need-card" onclick="buscarAtalho('farmácia')"><span>💊</span><strong>Saúde</strong><small>Farmácias e serviços de saúde</small></button>
-        <button class="need-card" onclick="buscarAtalho('pet')"><span>🐶</span><strong>Pets</strong><small>Pet shops e cuidados</small></button>
-        <button class="need-card" onclick="buscarAtalho('mecânica')"><span>🚗</span><strong>Automotivo</strong><small>Oficinas e serviços para veículos</small></button>
+        <div class="stat-card">
+          <span class="stat-num" id="total-count">—</span>
+          <span class="stat-label">comércios cadastrados</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="total-cats">—</span>
+          <span class="stat-label">categorias</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">1</span>
+          <span class="stat-label">bairro conectado</span>
+        </div>
       </div>
     </div>
   </section>
@@ -315,16 +292,8 @@
   <!-- FILTROS -->
   <div class="filtros-bar" id="comercios">
     <div class="container filtros-inner">
-      <div class="cats">
+      <div class="cats" id="cats-wrap">
         <button class="cat active" onclick="setCat('todos',this)">Todos</button>
-        <button class="cat" onclick="setCat('alimentacao',this)">🍽️ Alimentação</button>
-        <button class="cat" onclick="setCat('servicos',this)">✂️ Serviços</button>
-        <button class="cat" onclick="setCat('comercio',this)">🛒 Comércio</button>
-        <button class="cat" onclick="setCat('saude',this)">💊 Saúde</button>
-        <button class="cat" onclick="setCat('beleza',this)">💅 Beleza</button>
-        <button class="cat" onclick="setCat('pet',this)">🐾 Pet</button>
-        <button class="cat" onclick="setCat('educacao',this)">📚 Educação</button>
-        <button class="cat" onclick="setCat('automotivo',this)">🚗 Automotivo</button>
       </div>
       <span class="filtros-count" id="count-label"></span>
     </div>
@@ -333,24 +302,16 @@
   <!-- LISTA -->
   <section class="section-lista">
     <div class="container">
+      <div id="loading-wrap" class="loading-wrap">
+        <div class="spinner"></div>
+        <p>Carregando comércios…</p>
+      </div>
       <div class="lista" id="lista"></div>
       <div class="empty hidden" id="empty">
         <p class="empty-icon">🔍</p>
         <p class="empty-title">Nenhum comércio encontrado</p>
         <p class="empty-sub">Tente outro termo ou <a href="#" onclick="abrirModal();return false;">cadastre esse comércio</a>.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- INDIQUE UM COMÉRCIO -->
-  <section class="needs-section">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-kicker">Construa junto</p>
-        <h2>Conhece um comércio que deveria estar aqui?</h2>
-        <p>Ajude o Bela Vista Conecta a ficar mais útil para todos os moradores.</p>
-      </div>
-      <a href="#" class="btn-wpp" onclick="abrirModal();return false;">🏪 Indicar um comércio</a>
     </div>
   </section>
 
@@ -376,8 +337,8 @@
   <section class="banner">
     <div class="container banner-inner">
       <div class="banner-text">
-        <h3>Seu negócio ainda não está aqui?</h3>
-        <p>Cadastro gratuito, rápido e sem burocracia. Facilite para os moradores encontrarem você.</p>
+        <h3>Seu comércio ainda não está aqui?</h3>
+        <p>Cadastro gratuito, rápido e sem burocracia. Apareça para quem mora no bairro.</p>
       </div>
       <a href="#" class="btn-primary" onclick="abrirModal();return false;">Cadastrar meu comércio →</a>
     </div>
@@ -395,12 +356,12 @@
   </footer>
 
   <!-- MODAL CADASTRO -->
-  <div class="overlay hidden" id="overlay" onclick="fecharModal(event)">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="Cadastrar meu negócio">
+  <div class="overlay hidden" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Cadastrar comércio">
       <button class="modal-close" onclick="fecharModal()" aria-label="Fechar">×</button>
       <div id="form-area">
-        <p class="modal-title">Cadastrar meu negócio gratuitamente</p>
-        <p class="modal-sub">Ajude os moradores a encontrarem seu comércio ou serviço quando precisarem.</p>
+        <p class="modal-title">Cadastrar comércio</p>
+        <p class="modal-sub">Gratuito e sem burocracia. Seu negócio aparece no site automaticamente.</p>
         <div class="form-group">
           <label for="f-nome">Nome do comércio *</label>
           <input type="text" id="f-nome" placeholder="Ex: Bar do Zé" />
@@ -410,25 +371,28 @@
           <label for="f-cat">Categoria *</label>
           <select id="f-cat">
             <option value="">Selecione...</option>
-            <option value="alimentacao">🍽️ Alimentação</option>
-            <option value="servicos">✂️ Serviços</option>
-            <option value="comercio">🛒 Comércio</option>
-            <option value="saude">💊 Saúde</option>
-            <option value="beleza">💅 Beleza</option>
-            <option value="pet">🐾 Pet</option>
-            <option value="educacao">📚 Educação</option>
-            <option value="automotivo">🚗 Automotivo</option>
+            <option value="Alimentação">🍽️ Alimentação</option>
+            <option value="Serviços Gerais">✂️ Serviços Gerais</option>
+            <option value="Mercado e Mercearia">🛒 Mercado e Mercearia</option>
+            <option value="Saúde e Farmácia">💊 Saúde e Farmácia</option>
+            <option value="Beleza e Estética">💅 Beleza e Estética</option>
+            <option value="Pet Shop">🐾 Pet Shop</option>
+            <option value="Educação">📚 Educação</option>
+            <option value="Roupas e Calçados">👗 Roupas e Calçados</option>
+            <option value="Eletrônicos">📱 Eletrônicos</option>
+            <option value="Academia e Esporte">🏋️ Academia e Esporte</option>
+            <option value="Outro">🏪 Outro</option>
           </select>
           <span class="erro hidden" id="erro-cat">Selecione uma categoria.</span>
         </div>
         <div class="form-group">
           <label for="f-desc">Descrição breve *</label>
-          <input type="text" id="f-desc" placeholder="Ex: Lanches, sucos e pastéis" />
+          <input type="text" id="f-desc" placeholder="Ex: Lanches, sucos e pastéis" maxlength="200" />
           <span class="erro hidden" id="erro-desc">Adicione uma descrição.</span>
         </div>
         <div class="form-group">
-          <label for="f-wpp">WhatsApp *</label>
-          <input type="tel" id="f-wpp" placeholder="(11) 9 0000-0000" />
+          <label for="f-wpp">WhatsApp (só números) *</label>
+          <input type="tel" id="f-wpp" placeholder="11999999999" />
           <span class="erro hidden" id="erro-wpp">Informe o WhatsApp.</span>
         </div>
         <div class="form-group">
@@ -439,197 +403,205 @@
           <label for="f-hor">Horário de funcionamento</label>
           <input type="text" id="f-hor" placeholder="Ex: Seg a Sex, 8h às 18h" />
         </div>
-        <button class="btn-primary btn-full" onclick="enviarCadastro()">Enviar pelo WhatsApp →</button>
-        <p class="form-obs">Você será redirecionado ao WhatsApp para confirmar o cadastro.</p>
+        <div class="erro hidden" id="erro-geral" style="margin-bottom:.75rem;font-size:13px;"></div>
+        <button class="btn-primary btn-full" id="btn-enviar" onclick="enviarCadastro()">Cadastrar agora →</button>
+        <p class="form-obs">Seu comércio aparecerá na lista em instantes. Sem burocracia.</p>
       </div>
       <div id="sucesso" class="hidden sucesso-box">
         <span class="sucesso-icon">✅</span>
-        <h3>Dados enviados!</h3>
-        <p>Continue a conversa no WhatsApp para finalizar seu cadastro.</p>
+        <h3>Cadastro realizado!</h3>
+        <p>Seu comércio foi registrado e aparecerá na lista em instantes.<br>Obrigado por fazer parte do Bela Vista Conecta!</p>
         <button class="btn-primary" onclick="fecharModal()" style="background:var(--teal);color:#fff;">Fechar</button>
       </div>
     </div>
   </div>
 
   <script>
-    /* =====================
-       DADOS DOS COMÉRCIOS
-       Para adicionar: copie um bloco, preencha e salve.
-       whatsapp: 55 + DDD + número (só números)
-    ===================== */
-    const comercios = [
-      {
-        nome: "Bar do Zé",
-        categoria: "alimentacao",
-        descricao: "Petiscos, chopp gelado e boa conversa",
-        whatsapp: "5511900000001",
-        endereco: "Rua Exemplo, 10 — Bela Vista",
-        horario: "Ter-Dom 17h–00h",
-        emoji: "🍺",
-        novo: true,
-        destaque: false
-      },
-      {
-        nome: "Lanchonete da Maria",
-        categoria: "alimentacao",
-        descricao: "Lanches, pastéis e sucos naturais",
-        whatsapp: "5511900000002",
-        endereco: "Av. Principal, 45 — Bela Vista",
-        horario: "Seg-Sáb 7h–20h",
-        emoji: "🥙",
-        novo: false,
-        destaque: true
-      },
-      {
-        nome: "Salão Beleza Total",
-        categoria: "beleza",
-        descricao: "Corte, escova, manicure e pedicure",
-        whatsapp: "5511900000003",
-        endereco: "Rua das Flores, 22 — Bela Vista",
-        horario: "Ter-Sáb 9h–19h",
-        emoji: "💇",
-        novo: true,
-        destaque: false
-      },
-      {
-        nome: "Mercadinho Bela Vista",
-        categoria: "comercio",
-        descricao: "Mercadinho de bairro com delivery",
-        whatsapp: "5511900000004",
-        endereco: "Rua Central, 88 — Bela Vista",
-        horario: "Todos os dias 7h–22h",
-        emoji: "🛒",
-        novo: false,
-        destaque: false
-      },
-      {
-        nome: "Farmácia Saúde+",
-        categoria: "saude",
-        descricao: "Medicamentos, perfumaria e delivery",
-        whatsapp: "5511900000005",
-        endereco: "Av. Principal, 120 — Bela Vista",
-        horario: "Seg-Sáb 8h–20h",
-        emoji: "💊",
-        novo: false,
-        destaque: false
-      },
-      {
-        nome: "Oficina do João",
-        categoria: "servicos",
-        descricao: "Mecânica geral, elétrica e funilaria",
-        whatsapp: "5511900000006",
-        endereco: "Rua da Oficina, 5 — Bela Vista",
-        horario: "Seg-Sex 8h–18h",
-        emoji: "🔧",
-        novo: false,
-        destaque: false
-      }
-    ];
+    /* ── CONFIG ── */
+    const API_URL = "https://script.google.com/macros/s/AKfycbwudj3GO2LFdGWMuetsfNmADxOASLgLhAulCFB8CNCPi07l1AEAuXmftEguxA05-qsF/exec";
 
-    /* SEU WHATSAPP — troque pelo número real (55+DDD+número) */
-    const SEU_WHATSAPP = "5511900000000";
-
-    /* ===================== LÓGICA ===================== */
-    const nomesCat = { alimentacao:'Alimentação', servicos:'Serviços', comercio:'Comércio', saude:'Saúde', beleza:'Beleza', pet:'Pet', educacao:'Educação', automotivo:'Automotivo' };
+    /* ── ESTADO ── */
+    let comercios = [];
     let categoriaAtiva = 'todos';
 
+    /* ── ÍCONES ── */
     const iconWpp = `<svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.544 5.876L.057 23.999l6.304-1.654A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.357-.212-3.744.982.999-3.648-.233-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>`;
     const iconPin = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13" aria-hidden="true"><path d="M8 1.5A4.5 4.5 0 0 1 12.5 6c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z"/><circle cx="8" cy="6" r="1.5"/></svg>`;
     const iconClock = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 2" stroke-linecap="round"/></svg>`;
 
-    function criarCard(c) {
-      const wpp = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent('Olá! Vi seu comércio no Bela Vista Conecta e gostaria de saber mais.')}`;
-      const badges = [c.novo ? '<span class="badge badge-novo">Novo</span>' : '', c.destaque ? '<span class="badge badge-destaque">Destaque</span>' : ''].join('');
-      const metaEnd = c.endereco ? `<span class="card-meta-item">${iconPin} ${c.endereco}</span>` : '';
-      const metaHor = c.horario  ? `<span class="card-meta-item">${iconClock} ${c.horario}</span>` : '';
-      return `<div class="card">
-        <div class="card-emoji-wrap">${c.emoji}</div>
-        <div class="card-body">
-          <div class="card-top"><span class="card-nome">${c.nome}</span>${badges}</div>
-          <p class="card-desc">${c.descricao}</p>
-          <div class="card-meta">${metaEnd}${metaHor}</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-wpp" href="${wpp}" target="_blank" rel="noopener">${iconWpp} WhatsApp</a>
-          <span class="card-cat-tag">${nomesCat[c.categoria]||c.categoria}</span>
-        </div>
-      </div>`;
+    /* ── CARREGAR DA API ── */
+    async function carregarComercios() {
+      try {
+        const res = await fetch(API_URL + "?v=" + Date.now());
+        const dados = await res.json();
+        comercios = Array.isArray(dados) ? dados : [];
+      } catch (e) {
+        comercios = [];
+      }
+      document.getElementById('loading-wrap').classList.add('hidden');
+      atualizarFiltros();
+      filtrar();
     }
 
-    function filtrar() {
-      const busca = (document.getElementById('search-input').value||'').toLowerCase().trim();
-      const res = comercios.filter(c => {
-        const matchCat  = categoriaAtiva === 'todos' || c.categoria === categoriaAtiva;
-        const matchBusca = !busca || c.nome.toLowerCase().includes(busca) || c.descricao.toLowerCase().includes(busca) || (c.endereco||'').toLowerCase().includes(busca);
-        return matchCat && matchBusca;
+    /* ── FILTROS DINÂMICOS ── */
+    function atualizarFiltros() {
+      const cats = [...new Set(comercios.map(c => c.categoria).filter(Boolean))].sort();
+      const wrap = document.getElementById('cats-wrap');
+      wrap.innerHTML = '<button class="cat active" onclick="setCat(\'todos\',this)">Todos</button>';
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat';
+        btn.textContent = cat;
+        btn.onclick = function() { setCat(cat, this); };
+        wrap.appendChild(btn);
       });
-      const lista = document.getElementById('lista');
-      const empty = document.getElementById('empty');
-      const count = document.getElementById('count-label');
-      if (res.length === 0) { lista.innerHTML=''; empty.classList.remove('hidden'); count.textContent='0 encontrados'; }
-      else { lista.innerHTML=res.map(criarCard).join(''); empty.classList.add('hidden'); count.textContent=`${res.length} encontrado${res.length!==1?'s':''}`; }
-      const tc = document.getElementById('total-count');
-      if (tc) tc.textContent = comercios.length;
+      // atualiza stats
+      document.getElementById('total-count').textContent = comercios.length;
+      document.getElementById('total-cats').textContent = cats.length;
     }
 
     function setCat(cat, btn) {
       categoriaAtiva = cat;
-      document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       filtrar();
     }
 
-    document.getElementById('search-input').addEventListener('input', filtrar);
-
-    function buscarAtalho(termo) {
-      const input = document.getElementById('search-input');
-      input.value = termo;
-      categoriaAtiva = 'todos';
-      document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
-      document.querySelector('.cat').classList.add('active');
-      filtrar();
-      document.getElementById('comercios').scrollIntoView({behavior:'smooth', block:'start'});
+    /* ── FILTRAR E RENDERIZAR ── */
+    function filtrar() {
+      const busca = (document.getElementById('search-input').value || '').toLowerCase().trim();
+      let res = comercios;
+      if (categoriaAtiva !== 'todos') res = res.filter(c => c.categoria === categoriaAtiva);
+      if (busca) res = res.filter(c =>
+        (c.nome||'').toLowerCase().includes(busca) ||
+        (c.descricao||'').toLowerCase().includes(busca) ||
+        (c.endereco||'').toLowerCase().includes(busca)
+      );
+      const lista = document.getElementById('lista');
+      const empty = document.getElementById('empty');
+      const count = document.getElementById('count-label');
+      if (res.length === 0) {
+        lista.innerHTML = '';
+        empty.classList.remove('hidden');
+        count.textContent = '0 encontrados';
+      } else {
+        lista.innerHTML = res.map(criarCard).join('');
+        empty.classList.add('hidden');
+        count.textContent = `${res.length} encontrado${res.length !== 1 ? 's' : ''}`;
+      }
     }
 
-    /* MODAL */
+    function esc(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function criarCard(c) {
+      const wpp = c.whatsapp
+        ? `https://wa.me/55${c.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent('Olá! Vi seu comércio no Bela Vista Conecta e gostaria de saber mais.')}`
+        : null;
+      const badges = [
+        c.novo ? '<span class="badge badge-novo">Novo</span>' : '',
+        c.destaque ? '<span class="badge badge-destaque">Destaque</span>' : ''
+      ].join('');
+      const metaEnd = c.endereco ? `<span class="card-meta-item">${iconPin} ${esc(c.endereco)}</span>` : '';
+      const metaHor = c.horario  ? `<span class="card-meta-item">${iconClock} ${esc(c.horario)}</span>` : '';
+      const btnWpp  = wpp
+        ? `<a class="btn-wpp" href="${wpp}" target="_blank" rel="noopener">${iconWpp} WhatsApp</a>`
+        : '';
+      return `<div class="card">
+        <div class="card-emoji-wrap">${c.emoji || '🏪'}</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-nome">${esc(c.nome)}</span>${badges}</div>
+          <p class="card-desc">${esc(c.descricao)}</p>
+          <div class="card-meta">${metaEnd}${metaHor}</div>
+        </div>
+        <div class="card-actions">
+          ${btnWpp}
+          <span class="card-cat-tag">${esc(c.categoria)}</span>
+        </div>
+      </div>`;
+    }
+
+    document.getElementById('search-input').addEventListener('input', filtrar);
+
+    /* ── MODAL ── */
     function abrirModal() {
       document.getElementById('overlay').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
-    function fecharModal(e) {
-      if (e && e.target !== document.getElementById('overlay') && e.type === 'click') return;
-      if (e && e.currentTarget && e.currentTarget.classList.contains('overlay') && e.target !== e.currentTarget) return;
+    function fecharModal() {
       document.getElementById('overlay').classList.add('hidden');
       document.body.style.overflow = '';
       document.getElementById('form-area').classList.remove('hidden');
       document.getElementById('sucesso').classList.add('hidden');
+      document.querySelectorAll('.erro').forEach(e => e.classList.add('hidden'));
+      ['f-nome','f-cat','f-desc','f-wpp','f-end','f-hor'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = false;
+      btn.textContent = 'Cadastrar agora →';
     }
     document.getElementById('overlay').addEventListener('click', function(e) {
       if (e.target === this) fecharModal();
     });
 
-    function enviarCadastro() {
+    /* ── ENVIAR CADASTRO ── */
+    async function enviarCadastro() {
       const nome = document.getElementById('f-nome').value.trim();
       const cat  = document.getElementById('f-cat').value;
       const desc = document.getElementById('f-desc').value.trim();
-      const wpp  = document.getElementById('f-wpp').value.trim();
+      const wpp  = document.getElementById('f-wpp').value.replace(/\D/g,'');
       const end  = document.getElementById('f-end').value.trim();
       const hor  = document.getElementById('f-hor').value.trim();
+
       let valido = true;
-      document.querySelectorAll('.erro').forEach(e=>e.classList.add('hidden'));
-      if (!nome) { document.getElementById('erro-nome').classList.remove('hidden'); valido=false; }
-      if (!cat)  { document.getElementById('erro-cat').classList.remove('hidden');  valido=false; }
-      if (!desc) { document.getElementById('erro-desc').classList.remove('hidden'); valido=false; }
-      if (!wpp)  { document.getElementById('erro-wpp').classList.remove('hidden');  valido=false; }
+      document.querySelectorAll('.erro').forEach(e => e.classList.add('hidden'));
+      if (!nome) { document.getElementById('erro-nome').classList.remove('hidden'); valido = false; }
+      if (!cat)  { document.getElementById('erro-cat').classList.remove('hidden');  valido = false; }
+      if (!desc) { document.getElementById('erro-desc').classList.remove('hidden'); valido = false; }
+      if (!wpp)  { document.getElementById('erro-wpp').classList.remove('hidden');  valido = false; }
       if (!valido) return;
-      const cats = {alimentacao:'Alimentação',servicos:'Serviços',comercio:'Comércio',saude:'Saúde',beleza:'Beleza',pet:'Pet',educacao:'Educação'};
-      const msg = `*Novo cadastro — Bela Vista Conecta* 📍\n\n🏪 *Comércio:* ${nome}\n🗂️ *Categoria:* ${cats[cat]||cat}\n📝 *Descrição:* ${desc}\n📱 *WhatsApp:* ${wpp}${end?`\n📍 *Endereço:* ${end}`:''}${hor?`\n🕐 *Horário:* ${hor}`:''}\n\nQuero cadastrar meu comércio gratuitamente!`;
-      document.getElementById('form-area').classList.add('hidden');
-      document.getElementById('sucesso').classList.remove('hidden');
-      setTimeout(()=>window.open(`https://wa.me/${SEU_WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank'),400);
+
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      const emojis = {
+        'Alimentação':'🍽️','Serviços Gerais':'✂️','Mercado e Mercearia':'🛒',
+        'Saúde e Farmácia':'💊','Beleza e Estética':'💅','Pet Shop':'🐾',
+        'Educação':'📚','Roupas e Calçados':'👗','Eletrônicos':'📱',
+        'Academia e Esporte':'🏋️','Outro':'🏪'
+      };
+
+      const payload = {
+        nome, categoria: cat, descricao: desc,
+        whatsapp: wpp, endereco: end, horario: hor,
+        emoji: emojis[cat] || '🏪'
+      };
+
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        document.getElementById('form-area').classList.add('hidden');
+        document.getElementById('sucesso').classList.remove('hidden');
+        // recarrega a lista após 2s
+        setTimeout(() => carregarComercios(), 2000);
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = 'Cadastrar agora →';
+        const err = document.getElementById('erro-geral');
+        err.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
+        err.classList.remove('hidden');
+      }
     }
 
-    filtrar();
+    /* ── INIT ── */
+    carregarComercios();
   </script>
 </body>
 </html>
